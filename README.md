@@ -342,7 +342,6 @@ results in a query such as:
           "geo_distance": {
             "distance": "5km",
             "distance_type": "plane",
-            "optimize_bbox": "indexed",
             "center_point": {
               "lat": 51.5,
               "lon": -0.06
@@ -431,10 +430,9 @@ results in a query such as:
     "bool": {
       "should": [
         {
-          "match": {
+          "match_phrase": {
             "phrase.default": {
               "analyzer": "standard",
-              "type": "phrase",
               "boost": 1,
               "slop": 2,
               "query": "union square"
@@ -444,10 +442,9 @@ results in a query such as:
         {
           "function_score": {
             "query": {
-              "match": {
+              "match_phrase": {
                 "phrase.default": {
                   "analyzer": "standard",
-                  "type": "phrase",
                   "boost": 1,
                   "slop": 2,
                   "query": "union square"

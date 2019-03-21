@@ -151,7 +151,7 @@ class AddressesUsingIdsQuery extends Query {
         function_score: {
           query: {
             bool: {
-              minimum_number_should_match: 1,
+              minimum_should_match: 1,
               should: [
                 createStreetShould(vs)
               ]
@@ -198,10 +198,10 @@ class AddressesUsingIdsQuery extends Query {
         return acc;
       }, []);
 
-      // add filter.bool.minimum_number_should_match and filter.bool.should,
+      // add filter.bool.minimum_should_match and filter.bool.should,
       //  creating intermediate objects as it goes
       _.set(base.query.function_score.query.bool, 'filter.bool', {
-        minimum_number_should_match: 1,
+        minimum_should_match: 1,
         should: id_filters
       });
 

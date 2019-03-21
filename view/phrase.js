@@ -11,24 +11,24 @@ module.exports = function( vs ){
   }
 
   // base view
-  var view = { 'match': {} };
+  var view = { 'match_phrase': {} };
 
   // match query
-  view.match[ vs.var('phrase:field') ] = {
+  view.match_phrase[ vs.var('phrase:field') ] = {
     analyzer: vs.var('phrase:analyzer'),
-    type: 'phrase',
     boost: vs.var('phrase:boost'),
     slop: vs.var('phrase:slop'),
     query: vs.var('input:name')
   };
 
   if (vs.isset('phrase:fuzziness')) {
-    view.match[ vs.var('phrase:field') ].fuzziness = vs.var('phrase:fuzziness');
+    view.match_phrase[ vs.var('phrase:field') ].fuzziness = vs.var('phrase:fuzziness');
   }
 
-  if (vs.isset('phrase:cutoff_frequency')) {
-    view.match[ vs.var('phrase:field') ].cutoff_frequency = vs.var('phrase:cutoff_frequency');
-  }
+  // Not supported for match_phrase queries
+  // if (vs.isset('phrase:cutoff_frequency')) {
+  //   view.match_phrase[ vs.var('phrase:field') ].cutoff_frequency = vs.var('phrase:cutoff_frequency');
+  // }
 
   return view;
 };
